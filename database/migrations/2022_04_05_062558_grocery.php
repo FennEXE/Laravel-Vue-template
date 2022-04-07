@@ -13,7 +13,7 @@ class Grocery extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('grocery', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->decimal('price', $precision = 8, $scale = 2);

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class grocery extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = ['name', 'price', 'amount', 'max_amount'];
+	protected $fillable = ['name', 'price', 'amount', 'max_amount'];
 
 }
