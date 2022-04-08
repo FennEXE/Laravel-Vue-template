@@ -29,11 +29,13 @@
 		<input v-model="itemName">
 		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 0.01 ? Math.abs(this.value) : 0.01" />
+		<input v-model="itemMax" type="number" value="0" min="1" step="1"/>
 		<button @click="createProduct()">Add</button>	
 		</div>
 		<div v-if="formVisible == 1">
 			<input v-model="itemName">
 			<input v-model="itemPrice" type="number" min="0.01" step="0.01"  />
+			<input v-model="itemMax" type="number" value="0" min="1" step="1"/>
 			<button @click="editDone(itemId)">Done</button>
 		</div>	
 	</div>
@@ -52,6 +54,7 @@ export default {
 			itemValue: 1.99,
 			itemPrice: null,
 			itemAmount: null,
+			itemMax: null,
 		}
 	},
 	methods: {
@@ -69,7 +72,7 @@ export default {
 		},
 		//Adds a new product to the list
 		createProduct() {
-			this.$store.dispatch('addItem', {
+			this.$store.dispatch('createGrocery', {
 				name: this.itemName, 
 				value: this.itemValue
 			});

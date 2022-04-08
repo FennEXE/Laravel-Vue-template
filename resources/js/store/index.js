@@ -15,7 +15,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         groceries: [],
-        count: 0
     },
     mutations: {
         set_groceries(state, payload) {
@@ -24,21 +23,28 @@ export default new Vuex.Store({
     },
     getters: {
         getGroceries(state) {
-            return state.cruds
+            axios.get('api/grocery').then(response => {
+                commit('set_groceries', response.data)
+            });
+            console.log("Getter received");
+            return state.groceries
         }
     },
     actions: {
         getAllGroceries({ commit }) {
+
             axios.get('api/grocery').then(response => {
+                commit('set_groceries', response.data)
+            });
+            console.log("Action received");
+            console.log(response.data);
+        },
+
+        createGrocery({ commit }, payload) {
+            axios.post('api/grocery', payload).then(response => {
                 commit('set_groceries', response.data)
             })
         },
-
-        // createGrocery({ commit }, payload) {
-        //     axios.post('api/crud', payload).then(response => {
-        //         commit('SET_CRUD', response.data)
-        //     })
-        // },
 
         // deleteGrocery({ commit }, payload) {
         //     console.log(`api/crud/${payload.id}`);

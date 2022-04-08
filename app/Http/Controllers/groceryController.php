@@ -8,6 +8,7 @@ class groceryController extends Controller
 {
 	public function index()
 	{
+		echo "received";
 		$grocery = grocery::All();
 		return response()->json($grocery);
 	}
