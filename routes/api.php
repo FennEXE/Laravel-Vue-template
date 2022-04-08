@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('grocery', [groceryController::class, 'index']);
-// Route::post('grocery', [groceryController::class, 'store']);
+Route::get('grocery', [groceryController::class, 'index']);
+Route::post('grocery', [groceryController::class, 'store']);
 
 Route::resource('groceryController', 'App\Http\Controllers\groceryController');
