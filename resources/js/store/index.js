@@ -21,6 +21,11 @@ export default new Vuex.Store({
             console.log(payload.data)
             state.groceries = payload.data;
             console.log(state.groceries)
+        },
+
+        changeCount(state, payload) {
+            state.groceries[payload.id].amount = payload.amount;
+            //axios.post();
         }
     },
     getters: {
@@ -33,6 +38,10 @@ export default new Vuex.Store({
             axios.get('api/Grocery').then(response => {
                 commit('set_groceries', response)
             });
+        },
+
+        changeAmount({ commit }) {
+            commit('changeCount', payload)
         },
 
         createGrocery({ commit }, payload) {

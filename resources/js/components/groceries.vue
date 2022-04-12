@@ -11,8 +11,8 @@
 			</tr>
 			<tr v-for="(product, i) in products" :key="i">	
 				<td>{{productList[i].name}}</td>
-				<td>{{productList[i].value}}</td>
-				<td><input v-model="productList[i].amount" value="0" placeholder="0" type="number" min="0" oninput="this.value = 
+				<td>{{productList[i].price}}</td>
+				<td><input v-model="productList[i].amount" value="0" placeholder="0" type="number" min="0" :max="productList[i].max_amount" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" v-on:change="amount(i, productList[i].amount)"/></td>
 				<td>{{stopNan(productList[i].price, productList[i].amount, i)}}</td>
 				<td><button @click="deleteProduct(i)">Delete</button><button @click="editProduct(i)">Edit</button></td>
