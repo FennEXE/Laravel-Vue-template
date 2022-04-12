@@ -3,46 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Grocery;
 
-class groceryController extends Controller
+class GroceryController extends Controller
 {
 	public function index()
 	{
-		echo "received";
-		$grocery = grocery::All();
+		$grocery = Grocery::get();
 		return response()->json($grocery);
 	}
 
 	public function create()
 	{
-		$this->authorize('create', grocery::class);
+		$this->authorize('create', Grocery::class);
 	}
 
-	public function store(grocery $grocery)
+	public function store(Grocery $grocery)
 	{
 		$validated = $grocery->validate();
 
-		$grocery = grocery::create([
+		$grocery = Grocery::create([
 			'name' => $validated['name'],
 			'price' => $validated['price'],
 			'amount' => $validated['amount'],
 			'max_amount' => $validated['max_amount'],		
 		]);
 
-		return response()->json(grocery::All());
+		return response()->json(Grocery::All());
 	}
 
-	public function edit(grocery $grocery)
+	public function edit(Grocery $grocery)
 	{
 		//
 	}
 
-	public function update(grocery $grocery)
+	public function update(Grocery $grocery)
 	{
 		//I forgot how to do this part
 		$validated = $grocery->validate();
 		
-		$grocery = grocery::create([
+		$grocery = Grocery::create([
 			'name' => $validated['name'],
 			'price' => $validated['price'],
 			'amount' => $validated['amount'],
@@ -50,10 +50,10 @@ class groceryController extends Controller
 		]);
 	}
 
-	public function destroy(grocery $grocery)
+	public function destroy(Grocery $grocery)
 	{
 		$product->delete();
 
-		return response()->json(grocery::All());
+		return response()->json(Grocery::All());
 	}
 }

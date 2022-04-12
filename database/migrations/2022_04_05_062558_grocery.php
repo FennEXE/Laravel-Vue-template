@@ -13,7 +13,7 @@ class Grocery extends Migration
      */
     public function up()
     {
-        Schema::create('grocery', function (Blueprint $table) {
+        Schema::create('groceries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->decimal('price', $precision = 8, $scale = 2);
@@ -30,6 +30,6 @@ class Grocery extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('groceries');
     }
 }

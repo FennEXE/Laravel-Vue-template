@@ -18,30 +18,25 @@ export default new Vuex.Store({
     },
     mutations: {
         set_groceries(state, payload) {
-            state.groceries = payload;
+            console.log(payload.data)
+            state.groceries = payload.data;
+            console.log(state.groceries)
         }
     },
     getters: {
         getGroceries(state) {
-            axios.get('api/grocery').then(response => {
-                commit('set_groceries', response.data)
-            });
-            console.log("Getter received");
             return state.groceries
         }
     },
     actions: {
         getAllGroceries({ commit }) {
-
-            axios.get('api/grocery').then(response => {
-                commit('set_groceries', response.data)
+            axios.get('api/Grocery').then(response => {
+                commit('set_groceries', response)
             });
-            console.log("Action received");
-            console.log(response.data);
         },
 
         createGrocery({ commit }, payload) {
-            axios.post('api/grocery', payload).then(response => {
+            axios.post('api/Grocery', payload).then(response => {
                 commit('set_groceries', response.data)
             })
         },
