@@ -22,4 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('grocery', [groceryController::class, 'index']);
 // Route::post('grocery', [groceryController::class, 'store']);
 
-Route::resource('Grocery', GroceryController::class);
+Route::resource('grocery', GroceryController::class);

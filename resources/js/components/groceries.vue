@@ -82,7 +82,7 @@ export default {
 		},
 		//Deletes a product from the list
 		deleteProduct(product) {
-			this.$store.dispatch('deleteItem', product);
+			this.$store.dispatch('deleteProduct', product);
 		},
 		//opens up the edit menu for a product.
 		editProduct(product) {

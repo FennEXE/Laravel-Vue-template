@@ -25,36 +25,39 @@ export default new Vuex.Store({
             state.groceries[payload.nid].amount = payload.amount;
             let newPayload = {
                 nid: payload.nid,
-                id: Number(payload.nid+1),
+                id: state.groceries[payload.nid].id,
                 name: state.groceries[payload.nid].name,
                 price: state.groceries[payload.nid].price,
                 amount: payload.amount,
                 max_amount: state.groceries[payload.nid].max_amount
             };
-            axios.put('api/Grocery/' + newPayload.id, newPayload).then(response => {
+            axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
                 console.log(response);
             });
         },
 
         sqlEdit(state, payload) {
             console.log(payload)
-            state.groceries[payload.nid] = payload;
             let newPayload = {
                 nid: payload.nid,
-                id: Number(payload.nid+1),
+                id: state.groceries[payload.nid].id,
                 name: payload.name,
                 price: Number(payload.price),
                 amount: Number(payload.amount),
                 max_amount: Number(payload.max_amount)
             }
+            state.groceries[payload.nid] = newPayload;
             console.log(newPayload);
-            axios.put('api/Grocery/' + newPayload.id, newPayload).then(response => {
+            axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
                 console.log(response);
             })
         },
 
         sqlDestroy(state, payload) {
-            console.log(payload + state)
+            let newPayload = state.groceries[payload];
+            axios.delete('api/grocery/' + newPayload.id).then(response => {
+                state.groceries = response;
+            })
         }
     },
     getters: {
@@ -64,7 +67,7 @@ export default new Vuex.Store({
     },
     actions: {
         getAllGroceries({ commit }) {
-            axios.get('api/Grocery').then(response => {
+            axios.get('api/grocery').then(response => {
                 commit('set_groceries', response)
             });
         },
@@ -74,12 +77,15 @@ export default new Vuex.Store({
         },
 
         editProduct({ commit }, payload) {
-            
             commit('sqlEdit', payload)
         },
 
+        deleteProduct({ commit }, payload) {
+            commit('sqlDestroy', payload)
+        },
+
         createGrocery({ commit }, payload) {
-            axios.post('api/Grocery', payload).then(
+            axios.post('api/grocery', payload).then(
                 commit('getAllGroceries')
             )
         },

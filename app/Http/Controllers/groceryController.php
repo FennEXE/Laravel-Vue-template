@@ -9,19 +9,21 @@ class GroceryController extends Controller
 {
 	public function index()
 	{
+		//Axios.get
 		$grocery = Grocery::get();
 		return response()->json($grocery);
 	}
 
 	public function create()
 	{
-		return "create";
+		return response()->json("create");
 		$this->authorize('create', Grocery::class);
 	}
 
 	public function store(Grocery $grocery)
 	{
-		echo "store";
+		//Axios.post?
+		return response()->json("Store");
 		$validated = $grocery->validate();
 
 		$grocery = Grocery::create([
@@ -36,7 +38,7 @@ class GroceryController extends Controller
 
 	public function edit(Grocery $grocery)
 	{
-		return "edit";
+		return response()->json("edit");
 		//
 	}
 
@@ -53,8 +55,8 @@ class GroceryController extends Controller
 
 	public function destroy(Grocery $grocery)
 	{
-		$product->delete();
-
+		//Axios.delete?
+		$grocery->delete();
 		return response()->json(Grocery::All());
 	}
 }
