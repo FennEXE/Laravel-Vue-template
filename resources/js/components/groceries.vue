@@ -6,6 +6,7 @@
 				<th>Product</th>
 				<th>Prijs</th>
 				<th>Aantal</th>
+				<th>Max</th>
 				<th>Subtotaal</th>
 				<th>Opties</th>
 			</tr>
@@ -14,6 +15,7 @@
 				<td>{{productList[i].price}}</td>
 				<td><input v-model="productList[i].amount" value="0" placeholder="0" type="number" min="0" :max="productList[i].max_amount" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" v-on:change="amount(i, productList[i].amount)"/></td>
+				<td>{{productList[i].max_amount}}</td>
 				<td>{{stopNan(productList[i].price, productList[i].amount, i)}}</td>
 				<td><button @click="deleteProduct(i)">Delete</button><button @click="editProduct(i)">Edit</button></td>
 			</tr>
@@ -29,7 +31,8 @@
 		<input v-model="itemName">
 		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 0.01 ? Math.abs(this.value) : 0.01" />
-		<input v-model="itemMax" type="number" value="0" min="1" step="1"/>
+		<input v-model="itemMax" type="number" value="1" min="1" step="1" oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
 		<button @click="createProduct()">Add</button>	
 		</div>
 		<div v-if="formVisible == 1">
@@ -54,21 +57,21 @@ export default {
 			itemValue: 1.99,
 			itemPrice: null,
 			itemAmount: null,
-			itemMax: null,
+			itemMax: 1,
 		}
 	},
 	methods: {
 		//Sends a dispatch to mutate the amount of a product in the store index.js
 		amount(id, i) {
 			this.$store.dispatch('changeAmount', {
-				id: id,
+				nid: id,
 				amount: i
 			})
 		},
 		//Counts the total price of all products.
 		total()
 		{
-			return this.productList.reduce((total, product) => (product.value*product.amount) + total, 0).toFixed(2);
+			return this.productList.reduce((total, product) => (product.price*product.amount) + total, 0).toFixed(2);
 		},
 		//Adds a new product to the list
 		createProduct() {
@@ -91,12 +94,15 @@ export default {
 		},
 		//Sends the edit to store/index.js
 		editDone(i) {
-			this.$store.dispatch('editItem', {
-				id: i, 
+			this.$store.dispatch('editProduct', {
+				nid: i, 
 				name: this.itemName, 
-				value: this.itemPrice});
+				price: this.itemPrice,
+				amount: 0,
+				max_amount: this.itemMax});
 				
 			this.$set(this.productList[i], 'amount', this.itemAmount);
+			this.$set(this.productList[i], 'max_amount', this.itemMax);
 			this.$set(this.productList[i], 'name', this.itemName);
 			this.$set(this.productList[i], 'value', Number(this.itemPrice).toFixed(2));
 			this.itemName = '';

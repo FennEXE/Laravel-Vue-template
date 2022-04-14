@@ -18,14 +18,43 @@ export default new Vuex.Store({
     },
     mutations: {
         set_groceries(state, payload) {
-            console.log(payload.data)
             state.groceries = payload.data;
-            console.log(state.groceries)
         },
 
         changeCount(state, payload) {
-            state.groceries[payload.id].amount = payload.amount;
-            //axios.post();
+            state.groceries[payload.nid].amount = payload.amount;
+            let newPayload = {
+                nid: payload.nid,
+                id: Number(payload.nid+1),
+                name: state.groceries[payload.nid].name,
+                price: state.groceries[payload.nid].price,
+                amount: payload.amount,
+                max_amount: state.groceries[payload.nid].max_amount
+            };
+            axios.put('api/Grocery/' + newPayload.id, newPayload).then(response => {
+                console.log(response);
+            });
+        },
+
+        sqlEdit(state, payload) {
+            console.log(payload)
+            state.groceries[payload.nid] = payload;
+            let newPayload = {
+                nid: payload.nid,
+                id: Number(payload.nid+1),
+                name: payload.name,
+                price: Number(payload.price),
+                amount: Number(payload.amount),
+                max_amount: Number(payload.max_amount)
+            }
+            console.log(newPayload);
+            axios.put('api/Grocery/' + newPayload.id, newPayload).then(response => {
+                console.log(response);
+            })
+        },
+
+        sqlDestroy(state, payload) {
+            console.log(payload + state)
         }
     },
     getters: {
@@ -40,14 +69,19 @@ export default new Vuex.Store({
             });
         },
 
-        changeAmount({ commit }) {
+        changeAmount({ commit }, payload) {
             commit('changeCount', payload)
         },
 
+        editProduct({ commit }, payload) {
+            
+            commit('sqlEdit', payload)
+        },
+
         createGrocery({ commit }, payload) {
-            axios.post('api/Grocery', payload).then(response => {
-                commit('set_groceries', response.data)
-            })
+            axios.post('api/Grocery', payload).then(
+                commit('getAllGroceries')
+            )
         },
 
         // deleteGrocery({ commit }, payload) {

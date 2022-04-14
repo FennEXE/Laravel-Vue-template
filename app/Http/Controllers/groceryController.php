@@ -15,11 +15,13 @@ class GroceryController extends Controller
 
 	public function create()
 	{
+		return "create";
 		$this->authorize('create', Grocery::class);
 	}
 
 	public function store(Grocery $grocery)
 	{
+		echo "store";
 		$validated = $grocery->validate();
 
 		$grocery = Grocery::create([
@@ -34,20 +36,19 @@ class GroceryController extends Controller
 
 	public function edit(Grocery $grocery)
 	{
+		return "edit";
 		//
 	}
 
-	public function update(Grocery $grocery)
+	public function update(Request $request)
 	{
-		//I forgot how to do this part
-		$validated = $grocery->validate();
-		
-		$grocery = Grocery::create([
-			'name' => $validated['name'],
-			'price' => $validated['price'],
-			'amount' => $validated['amount'],
-			'max_amount' => $validated['max_amount'],		
-		]);
+		//Axios.put
+		$grocery = Grocery::find($request["id"]);
+		$grocery->update([
+			'name' => $request["name"],
+			'price' => $request["price"],
+			'amount' => $request["amount"],
+			'max_amount' => $request["max_amount"]]);	
 	}
 
 	public function destroy(Grocery $grocery)
