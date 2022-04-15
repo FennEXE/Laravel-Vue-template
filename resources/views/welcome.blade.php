@@ -37,3 +37,9 @@
     @endproduction
 </body>
 </html>
+
+<style>
+body {
+	background-color: #1f1f1f;
+}
+</style>
