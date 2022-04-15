@@ -22,7 +22,6 @@ export default new Vuex.Store({
         },
 
         sqlEdit(state, payload) {
-            console.log(payload)
             axios.put('api/grocery/' + payload.id, payload).then(response => {
                 let newGroceries = response.data;
                 state.groceries = newGroceries;
