@@ -36,7 +36,7 @@
 		</div>
 		<div v-if="formVisible == 1">
 			<input v-model="itemName">
-			<input v-model="itemPrice" type="number" min="0.01" step="0.01"  />
+			<input v-model="itemPrice" type="number" min="0.01" step="0.01"/>
 			<input v-model="itemMax" type="number" value="0" min="1" step="1"/>
 			<button @click="editDone()">Done</button>
 		</div>	
@@ -57,6 +57,7 @@ export default {
 			itemPrice: null,
 			itemAmount: null,
 			itemMax: 1,
+			productEdit: null
 		}
 	},
 	methods: {
@@ -87,28 +88,31 @@ export default {
 		},
 		//opens up the edit menu for a product.
 		editProduct(product) {
-			this.itemName = this.productList[product].name;
-			this.itemPrice = this.productList[product].value;
-			this.itemAmount = this.productList[product].amount;
-			this.itemId = this.productList[product].id;
+			this.productEdit = product
+			this.itemName = this.productList[product].name
+			this.itemPrice = this.productList[product].price
+			this.itemMax = this.productList[product].max_amount
 			this.formVisible = true;
 		},
 		//Sends the edit to store/index.js
 		editDone() {
-			let i = this.itemId
+			let newAmount = 0
+			let i = this.productEdit
 			this.$store.dispatch('editProduct', {
-				id: this.itemId, 
+				nid: this.productEdit,
+				id: this.productList[i].id, 
 				name: this.itemName, 
 				price: this.itemPrice,
-				amount: 0,
-				max_amount: this.itemMax});
-				
+				amount: newAmount,
+				max_amount: this.itemMax
+			});
 			this.$set(this.productList[i], 'amount', this.itemAmount);
 			this.$set(this.productList[i], 'max_amount', this.itemMax);
 			this.$set(this.productList[i], 'name', this.itemName);
 			this.$set(this.productList[i], 'value', Number(this.itemPrice).toFixed(2));
 			this.itemName = '';
 			this.itemPrice = 0.01;
+			this.itemAmount = null;
 			this.itemId = null
 			this.formVisible = false;
 		},

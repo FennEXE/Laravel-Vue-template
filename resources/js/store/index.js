@@ -24,10 +24,7 @@ export default new Vuex.Store({
         changeCount(state, payload) {
             let newPayload = state.groceries[payload.nid];
             newPayload.amount = payload.amount;
-            axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
-                let newGroceries = response.data;
-                state.groceries = newGroceries;
-            })
+            axios.put('api/grocery/' + newPayload.id, newPayload)
         },
 
         sqlEdit(state, payload) {
