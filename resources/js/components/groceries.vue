@@ -68,11 +68,13 @@ export default {
 				amount: e
 			})
 		},
+
 		//Counts the total price of all products.
 		total()
 		{
 			return this.productList.reduce((total, product) => (product.price*product.amount) + total, 0).toFixed(2);
 		},
+
 		//Adds a new product to the list
 		createProduct() {
 			this.$store.dispatch('createProduct', {
@@ -82,10 +84,12 @@ export default {
 				max_amount: this.itemMax
 			});
 		},
+
 		//Deletes a product from the list
 		deleteProduct(product) {
 			this.$store.dispatch('deleteProduct', product);
 		},
+
 		//opens up the edit menu for a product.
 		editProduct(product) {
 			this.productEdit = product
@@ -94,6 +98,7 @@ export default {
 			this.itemMax = this.productList[product].max_amount
 			this.formVisible = true;
 		},
+
 		//Sends the edit to store/index.js
 		editDone() {
 			let newAmount = 0
@@ -116,6 +121,7 @@ export default {
 			this.itemId = null
 			this.formVisible = false;
 		},
+
 		//Ensures the value is a number.
 		stopNan(value, amount, i) {
 			if(isNaN(amount) == true) {
@@ -124,6 +130,7 @@ export default {
 			this.subTotal[i] = Number(value * amount).toFixed(2)
 			return Number(this.subTotal[i]).toFixed(2);
 		},
+		
 		//Fills up the product list into Data to prevent the state being altered.
 		fillProduct(products) {
 			this.productList = JSON.parse(JSON.stringify(products));
