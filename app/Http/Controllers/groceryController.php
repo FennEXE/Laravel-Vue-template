@@ -14,49 +14,42 @@ class GroceryController extends Controller
 		return response()->json($grocery);
 	}
 
-	public function create()
+	public function store(Request $request)
 	{
-		return response()->json("create");
-		$this->authorize('create', Grocery::class);
-	}
-
-	public function store(Grocery $grocery)
-	{
-		//Axios.post?
-		return response()->json("Store");
-		$validated = $grocery->validate();
-
+		//Axios.post
+		
+		
 		$grocery = Grocery::create([
-			'name' => $validated['name'],
-			'price' => $validated['price'],
-			'amount' => $validated['amount'],
-			'max_amount' => $validated['max_amount'],		
+			'name' => $request['name'],
+			'price' => $request['value'],
+			'amount' => $request['amount'],
+			'max_amount' => $request['max_amount'],		
 		]);
 
-		return response()->json(Grocery::All());
-	}
-
-	public function edit(Grocery $grocery)
-	{
-		return response()->json("edit");
-		//
+		$grocery = Grocery::get();
+		return response()->json($grocery);
 	}
 
 	public function update(Request $request)
 	{
 		//Axios.put
 		$grocery = Grocery::find($request["id"]);
+
 		$grocery->update([
 			'name' => $request["name"],
 			'price' => $request["price"],
 			'amount' => $request["amount"],
-			'max_amount' => $request["max_amount"]]);	
+			'max_amount' => $request["max_amount"]]);
+			
+		$grocery = Grocery::get();
+		return response()->json($grocery);
 	}
 
 	public function destroy(Grocery $grocery)
 	{
-		//Axios.delete?
+		//Axios.delete
 		$grocery->delete();
-		return response()->json(Grocery::All());
+		$grocery = Grocery::get();
+		return response()->json($grocery);
 	}
 }

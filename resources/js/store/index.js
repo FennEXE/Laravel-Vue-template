@@ -22,41 +22,34 @@ export default new Vuex.Store({
         },
 
         changeCount(state, payload) {
-            state.groceries[payload.nid].amount = payload.amount;
-            let newPayload = {
-                nid: payload.nid,
-                id: state.groceries[payload.nid].id,
-                name: state.groceries[payload.nid].name,
-                price: state.groceries[payload.nid].price,
-                amount: payload.amount,
-                max_amount: state.groceries[payload.nid].max_amount
-            };
+            let newPayload = state.groceries[payload.nid];
+            newPayload.amount = payload.amount;
             axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
-                console.log(response);
-            });
+                let newGroceries = response.data;
+                state.groceries = newGroceries;
+            })
         },
 
         sqlEdit(state, payload) {
             console.log(payload)
-            let newPayload = {
-                nid: payload.nid,
-                id: state.groceries[payload.nid].id,
-                name: payload.name,
-                price: Number(payload.price),
-                amount: Number(payload.amount),
-                max_amount: Number(payload.max_amount)
-            }
-            state.groceries[payload.nid] = newPayload;
-            console.log(newPayload);
-            axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
-                console.log(response);
+            axios.put('api/grocery/' + payload.id, payload).then(response => {
+                let newGroceries = response.data;
+                state.groceries = newGroceries;
             })
         },
 
         sqlDestroy(state, payload) {
             let newPayload = state.groceries[payload];
             axios.delete('api/grocery/' + newPayload.id).then(response => {
-                state.groceries = response;
+                let newGroceries = response.data;
+                state.groceries = newGroceries;
+            })
+        },
+
+        sqlCreate(state, payload) {
+            axios.post('api/grocery', payload).then(response => {
+                let newGroceries = response.data;
+                state.groceries = newGroceries;
             })
         }
     },
@@ -84,23 +77,8 @@ export default new Vuex.Store({
             commit('sqlDestroy', payload)
         },
 
-        createGrocery({ commit }, payload) {
-            axios.post('api/grocery', payload).then(
-                commit('getAllGroceries')
-            )
+        createProduct({ commit }, payload) {
+            commit('sqlCreate', payload)
         },
-
-        // deleteGrocery({ commit }, payload) {
-        //     console.log(`api/crud/${payload.id}`);
-        //     axios.delete(`api/crud/${payload.id}`).then(response => {
-        //         commit('SET_CRUD', response.data)
-        //     })
-        // },
-
-        // editGrocery({ commit }, payload) {
-        //     axios.put(`api/crud/${payload.id}`, payload).then(response => {
-        //         commit('SET_CRUD', response.data)
-        //     })
-        // },
     }
 });

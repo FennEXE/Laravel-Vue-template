@@ -20,17 +20,16 @@
 				<td><button @click="deleteProduct(i)">Delete</button><button @click="editProduct(i)">Edit</button></td>
 			</tr>
 			<tr>
-				<th colspan="3"></th>
+				<th colspan="4"></th>
 				<th>Totaal</th>
 			</tr>
 			<tr>
-				<td colspan="3"></td>
+				<td colspan="4"></td>
 				<td>{{total()}} </td>
 			</tr>
 		</table>
 		<input v-model="itemName">
-		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01" oninput="this.value = 
- !!this.value && Math.abs(this.value) >= 0.01 ? Math.abs(this.value) : 0.01" />
+		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01"/>
 		<input v-model="itemMax" type="number" value="1" min="1" step="1" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
 		<button @click="createProduct()">Add</button>	
@@ -39,7 +38,7 @@
 			<input v-model="itemName">
 			<input v-model="itemPrice" type="number" min="0.01" step="0.01"  />
 			<input v-model="itemMax" type="number" value="0" min="1" step="1"/>
-			<button @click="editDone(itemId)">Done</button>
+			<button @click="editDone()">Done</button>
 		</div>	
 	</div>
 </template>
@@ -62,10 +61,10 @@ export default {
 	},
 	methods: {
 		//Sends a dispatch to mutate the amount of a product in the store index.js
-		amount(id, i) {
+		amount(i, e) {
 			this.$store.dispatch('changeAmount', {
-				nid: id,
-				amount: i
+				nid: i,
+				amount: e
 			})
 		},
 		//Counts the total price of all products.
@@ -75,9 +74,11 @@ export default {
 		},
 		//Adds a new product to the list
 		createProduct() {
-			this.$store.dispatch('createGrocery', {
+			this.$store.dispatch('createProduct', {
 				name: this.itemName, 
-				value: this.itemValue
+				value: this.itemValue,
+				amount: 0,
+				max_amount: this.itemMax
 			});
 		},
 		//Deletes a product from the list
@@ -89,13 +90,14 @@ export default {
 			this.itemName = this.productList[product].name;
 			this.itemPrice = this.productList[product].value;
 			this.itemAmount = this.productList[product].amount;
-			this.itemId = product;
+			this.itemId = this.productList[product].id;
 			this.formVisible = true;
 		},
 		//Sends the edit to store/index.js
-		editDone(i) {
+		editDone() {
+			let i = this.itemId
 			this.$store.dispatch('editProduct', {
-				nid: i, 
+				id: this.itemId, 
 				name: this.itemName, 
 				price: this.itemPrice,
 				amount: 0,
@@ -138,6 +140,9 @@ export default {
 </script>
 
 <style scoped>
+th{
+	min-width: 100px;
+}
 div{
 	padding-top: 20px;
 	padding-bottom: 40px;
