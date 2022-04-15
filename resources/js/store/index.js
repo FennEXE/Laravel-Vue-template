@@ -5,17 +5,11 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-// export default new Vuex.Store({
-//     state: {},
-//     mutations: {},
-//     getters: {},
-//     actions: {}
-// });
-
 export default new Vuex.Store({
     state: {
         groceries: [],
     },
+
     mutations: {
         set_groceries(state, payload) {
             state.groceries = payload.data;
@@ -50,11 +44,13 @@ export default new Vuex.Store({
             })
         }
     },
+
     getters: {
         getGroceries(state) {
             return state.groceries
         }
     },
+
     actions: {
         getAllGroceries({ commit }) {
             axios.get('api/grocery').then(response => {
