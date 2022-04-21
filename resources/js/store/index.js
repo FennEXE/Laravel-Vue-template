@@ -8,11 +8,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         groceries: [],
+        blogs: [],
     },
 
     mutations: {
         set_groceries(state, payload) {
             state.groceries = payload.data;
+        },
+
+        set_blog(state, payload) {
+            state.blogs = payload.data;
         },
 
         changeCount(state, payload) {
@@ -47,6 +52,12 @@ export default new Vuex.Store({
     getters: {
         getGroceries(state) {
             return state.groceries
+        },
+        getBlogs(state) {
+            return state.blogs
+        },
+        getComments(state) {
+            return state.comments
         }
     },
 
@@ -56,7 +67,6 @@ export default new Vuex.Store({
                 commit('set_groceries', response)
             });
         },
-
         changeAmount({ commit }, payload) {
             commit('changeCount', payload)
         },
@@ -72,5 +82,18 @@ export default new Vuex.Store({
         createProduct({ commit }, payload) {
             commit('sqlCreate', payload)
         },
+
+        //=====================================================
+
+        getAllBlogs({ commit }) {
+            axios.get('api/blog').then(response => {
+                commit('set_blog', response)
+            });
+        },
+        getComments({commit}, blogId) {
+            axios.get('api/comment').then(response => {
+                commit('set_comment', response)
+            });
+        }
     }
 });
