@@ -23,3 +23,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::post('grocery', [groceryController::class, 'store']);
 
 Route::resource('grocery', GroceryController::class);
+Route::resource('blogpost', BlogpostController::class);
+Route::resource('comment', CommentsController::class);
