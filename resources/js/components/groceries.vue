@@ -92,6 +92,7 @@ export default {
 
 		//opens up the edit menu for a product.
 		editProduct(product) {
+			this.$router.push({ name: 'edit' });
 			this.productEdit = product
 			this.itemName = this.productList[product].name
 			this.itemPrice = this.productList[product].price
