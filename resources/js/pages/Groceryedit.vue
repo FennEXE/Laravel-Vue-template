@@ -1,16 +1,16 @@
 <template>
     <div id="app">
         <router-view />
-        <groceries />
     </div>
 </template>
 
 <script>
-import Groceries from '../components/groceries.vue';
+import GroceryForm from "./components/groceryform.vue";
 export default {
-  name: "GroceryList",
+  name: "GroceryEdit",
+  formtype: 0,
   components: {
-    Groceries
+    GroceryForm
   },
 };
 </script>

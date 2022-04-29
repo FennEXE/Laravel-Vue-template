@@ -6,12 +6,10 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        groceries: [],
-    },
+    state: { groceries: [] },
 
     mutations: {
-        set_groceries(state, payload) {
+        set_groceries: function (state, payload) {
             state.groceries = payload.data;
         },
     },
@@ -30,11 +28,15 @@ export default new Vuex.Store({
         },
 
         changeAmount({ commit }, payload) {
+            console.log("Reaches actions changeAmount()");
             let newPayload = state.groceries[payload.nid];
+            console.log("Reaches state.groceries");
             newPayload.amount = payload.amount;
+            console.log("Reaches newPayload.amount");
             axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
                 commit('set_groceries', response)
             });
+            console.log("Reaches Axios command");
         },
 
         editProduct({ commit }, payload) {

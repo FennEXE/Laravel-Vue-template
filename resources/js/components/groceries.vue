@@ -17,7 +17,7 @@
  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" v-on:change="amount(i, productList[i].amount)"/></td>
 				<td>{{productList[i].max_amount}}</td>
 				<td>{{stopNan(productList[i].price, productList[i].amount, i)}}</td>
-				<td><button @click="deleteProduct(i)">Delete</button><button @click="editProduct(i)">Edit</button></td>
+				<td><button @click="editProduct(productList[i].id)">Edit</button>&nbsp;<button @click="deleteProduct(i)">Delete</button></td>
 			</tr>
 			<tr>
 				<th colspan="4"></th>
@@ -27,12 +27,8 @@
 				<td colspan="4"></td>
 				<td>{{total()}} </td>
 			</tr>
+			<tr><td colspan="6"><button @click="createProduct()">Create Grocery</button></td></tr>
 		</table>
-		<input v-model="itemName">
-		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01"/>
-		<input v-model="itemMax" type="number" value="1" min="1" step="1" oninput="this.value = 
- !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
-		<button @click="createProduct()">Add</button>	
 		</div>
 		<div v-if="formVisible == 1">
 			<input v-model="itemName">
@@ -45,7 +41,7 @@
 
 <script>
 export default {
-	name: "GroceryList",
+	name: "Groceries",
 	data() {
 		return {
 			productList: [],
@@ -63,6 +59,7 @@ export default {
 	methods: {
 		//Sends a dispatch to mutate the amount of a product in the store index.js
 		amount(i, e) {
+			console.log("Reaches amount()");
 			this.$store.dispatch('changeAmount', {
 				nid: i,
 				amount: e
@@ -77,12 +74,13 @@ export default {
 
 		//Adds a new product to the list
 		createProduct() {
-			this.$store.dispatch('createProduct', {
-				name: this.itemName, 
-				value: this.itemValue,
-				amount: 0,
-				max_amount: this.itemMax
-			});
+			this.$router.push('/create');
+			// this.$store.dispatch('createProduct', {
+			// 	name: this.itemName, 
+			// 	value: this.itemValue,
+			// 	amount: 0,
+			// 	max_amount: this.itemMax
+			// });
 		},
 
 		//Deletes a product from the list
@@ -92,7 +90,7 @@ export default {
 
 		//opens up the edit menu for a product.
 		editProduct(product) {
-			this.$router.push({ name: 'edit' });
+			this.$router.push('edit/' + product);
 			this.productEdit = product
 			this.itemName = this.productList[product].name
 			this.itemPrice = this.productList[product].price

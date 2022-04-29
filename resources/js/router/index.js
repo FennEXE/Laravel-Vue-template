@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import GroceryList from "../components/groceries.vue";
+import GroceryList from "../pages/Grocerylist.vue";
 import GroceryForm from "../components/groceryform.vue";
 
 Vue.use(VueRouter);
