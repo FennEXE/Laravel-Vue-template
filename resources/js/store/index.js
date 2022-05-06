@@ -28,15 +28,11 @@ export default new Vuex.Store({
         },
 
         changeAmount({ commit }, payload) {
-            console.log("Reaches actions changeAmount()");
-            let newPayload = state.groceries[payload.nid];
-            console.log("Reaches state.groceries");
-            newPayload.amount = payload.amount;
-            console.log("Reaches newPayload.amount");
+            let newPayload = payload.i
+            newPayload.amount = payload.newAmount
             axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
                 commit('set_groceries', response)
             });
-            console.log("Reaches Axios command");
         },
 
         editProduct({ commit }, payload) {
@@ -46,15 +42,16 @@ export default new Vuex.Store({
         },
 
         deleteProduct({ commit }, payload) {
-            let newPayload = state.groceries[payload];
-            axios.delete('api/grocery/' + newPayload.id).then(response => {
-                commit('set_groceries', response.data)
+            console.log('test')
+            axios.delete('api/grocery/' + payload.id).then(response => {
+                console.log(response.data);
+                commit('set_groceries', response)
             });
         },
 
         createProduct({ commit }, payload) {
             axios.post('api/grocery', payload).then(response => {
-                commit('set_groceries', response.data)
+                commit('set_groceries', response)
             });
         }
     }

@@ -14,10 +14,10 @@
 				<td>{{productList[i].name}}</td>
 				<td>{{productList[i].price}}</td>
 				<td><input v-model="productList[i].amount" value="0" placeholder="0" type="number" min="0" :max="productList[i].max_amount" oninput="this.value = 
- !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" v-on:change="amount(i, productList[i].amount)"/></td>
+ !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0" v-on:change="amount(productList[i], productList[i].amount)"/></td>
 				<td>{{productList[i].max_amount}}</td>
 				<td>{{stopNan(productList[i].price, productList[i].amount, i)}}</td>
-				<td><button @click="editProduct(productList[i].id)">Edit</button>&nbsp;<button @click="deleteProduct(i)">Delete</button></td>
+				<td><button @click="editProduct(productList[i].id)">Edit</button>&nbsp;<button @click="deleteProduct(productList[i])">Delete</button></td>
 			</tr>
 			<tr>
 				<th colspan="4"></th>
@@ -59,10 +59,9 @@ export default {
 	methods: {
 		//Sends a dispatch to mutate the amount of a product in the store index.js
 		amount(i, e) {
-			console.log("Reaches amount()");
 			this.$store.dispatch('changeAmount', {
-				nid: i,
-				amount: e
+				i,
+				newAmount: e
 			})
 		},
 
@@ -138,9 +137,9 @@ export default {
 	computed: {
 		//Product getter for store/index.js
 		products() {
-			const productGetter = [...this.$store.getters.getGroceries]
-			this.fillProduct(productGetter);
-			return this.productList;
+			const products = this.$store.getters.getGroceries;
+			this.fillProduct(products);
+			return products;
 		}
 	},
 	created() {

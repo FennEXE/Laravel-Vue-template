@@ -17,8 +17,6 @@ class GroceryController extends Controller
 	public function store(Request $request)
 	{
 		//Axios.post
-		
-		
 		$grocery = Grocery::create([
 			'name' => $request['name'],
 			'price' => $request['value'],
@@ -34,7 +32,7 @@ class GroceryController extends Controller
 	{
 		//Axios.put
 		$grocery = Grocery::find($request["id"]);
-
+		
 		$grocery->update([
 			'name' => $request["name"],
 			'price' => $request["price"],
