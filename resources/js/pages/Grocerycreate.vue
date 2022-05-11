@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <router-view />
-        <GroceryForm />
+        <GroceryForm :data="data" />
     </div>
 </template>
 
@@ -9,7 +9,13 @@
 import GroceryForm from "./components/groceryform.vue";
 export default {
   name: "GroceryCreate",
-  formtype: 0,
+  props: {
+    data: {
+       required: true,
+       formtype: 0,
+       type: integer
+    }
+  },
   components: {
     GroceryForm
   },

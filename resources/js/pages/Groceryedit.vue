@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <router-view />
+        <GroceryForm :data="formtype" />
     </div>
 </template>
 
