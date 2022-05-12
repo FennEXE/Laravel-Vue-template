@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$route.name==='create'">
+    <div v-if="formType==='create'">
 		<input v-model="localGrocery.name">
 		<input v-model="localGrocery.value" type="number" value="0.01" min="0.01" step="0.01"/>
 		<input v-model="localGrocery.max" type="number" value="1" min="1" step="1" oninput="this.value = 
@@ -7,10 +7,11 @@
  		<button @click="createProduct()">Add</button>
 	</div>
 	<div v-else>
-		{{groceryId}}
+
+		<h2>Edit: {{grocery.name}}</h2>
 		<input v-model="localGrocery.name">
-		<input v-model="localGrocery.value" type="number" value="0.01" min="0.01" step="0.01"/>
-		<input v-model="localGrocery.max" type="number" value="1" min="1" step="1" oninput="this.value = 
+		<input v-model="localGrocery.price" type="number" value="0.01" min="0.01" step="0.01"/>
+		<input v-model="localGrocery.max_amount" type="number" value="1" min="1" step="1" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
 		<button @click="editProduct()">Edit</button>
 	</div>
@@ -20,7 +21,7 @@
 export default {
 	name: "GroceryForm",
 	props: {
-		grocery: {
+		groceryProp: {
 			type: Object,
 			required: true,
 			default: {
@@ -33,7 +34,8 @@ export default {
 	data() {
 		return {
 			groceryId: this.$route.params.id,
-			localGrocery: this.grocery,
+			formType: this.$route.name,
+			localGrocery: this.groceryProp,
 		}
 	},
 	methods: {
@@ -47,10 +49,29 @@ export default {
 			});
 			this.$router.push('/');
 		},
-		fillProduct(product) {
-			this.localGrocery = JSON.parse(JSON.stringify(product));
+		editProduct() {
+			this.$store.dispatch('editProduct', {
+				nid: this.groceryId,
+				id: this.groceryId, 
+				name: this.localGrocery.name, 
+				price: this.localGrocery.price,
+				amount: 0,
+				max_amount: this.localGrocery.max_amount
+			});
+			this.$router.push('/');
+		},
+	},
+	computed: {
+		grocery() {
+			const getById = this.groceryId;
+			console.log(getById)
+			return this.localGrocery = this.$store.getters.getGroceries.find(x => x["id"] == getById)
 		}
-	}
+	},
+	created()
+	{
+        this.$store.dispatch('getAllGroceries');
+    },
 }
 
 // 

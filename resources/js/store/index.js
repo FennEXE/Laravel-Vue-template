@@ -37,9 +37,10 @@ export default new Vuex.Store({
             });
         },
 
-        getGrocery({ commit }, payload) {
+        getGrocery(payload) {
+            console.log(payload);
             axios.get('api/grocery/' + payload).then(response => {
-                commit('set_grocery', response)
+                console.log(response);
             });
         },
 

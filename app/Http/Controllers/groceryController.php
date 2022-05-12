@@ -14,6 +14,12 @@ class GroceryController extends Controller
 		return response()->json($grocery);
 	}
 
+	public function show(Request $request)
+	{
+		$grocery = Grocery::get($request);
+		return response()->json($grocery);
+	}
+
 	public function store(Request $request)
 	{
 		//Axios.post
