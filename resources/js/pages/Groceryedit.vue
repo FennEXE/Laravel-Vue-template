@@ -1,8 +1,7 @@
 <template>
     <div id="app">
         <router-view />
-        <GroceryForm :data="data"/>
-        <button @click="createProduct()">Add</button>
+        <GroceryForm :data="edit" />
     </div>
 </template>
 

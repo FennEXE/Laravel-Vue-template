@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <router-view />
-        <GroceryForm />
+        <GroceryForm :data="create" />
     </div>
 </template>
 
@@ -11,19 +11,8 @@ export default {
   name: "GroceryCreate",
   components: {
     GroceryForm
-  },
-  methods: {
-		//Adds a new product to the list
-		createProduct() {
-			this.$store.dispatch('createProduct', {
-				name: this.grocery.name, 
-				value: this.grocery.value,
-				amount: 0,
-				max_amount: this.grocery.max
-			});
-		},
   }
-};
+}
 </script>
 
 <style>

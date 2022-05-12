@@ -21,8 +21,8 @@ export default new VueRouter({
         },
         {
             name: "edit",
-            path: "/edit",
-            component: GroceryForm
+            path: "/edit/:id",
+            component: GroceryForm,
         }
     ]
 });

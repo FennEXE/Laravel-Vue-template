@@ -6,17 +6,27 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: { groceries: [] },
+    state: { 
+        groceries: [],
+        grocery: null,
+        formtype: null,
+    },
 
     mutations: {
         set_groceries: function (state, payload) {
             state.groceries = payload.data;
         },
+        set_grocery: function (state, payload) {
+            state.grocery = payload.data
+        }
     },
 
     getters: {
         getGroceries(state) {
             return state.groceries
+        },
+        getGrocery(state) {
+            return state.grocery
         }
     },
 
@@ -24,6 +34,12 @@ export default new Vuex.Store({
         getAllGroceries({ commit }) {
             axios.get('api/grocery').then(response => {
                 commit('set_groceries', response)
+            });
+        },
+
+        getGrocery({ commit }, payload) {
+            axios.get('api/grocery/' + payload).then(response => {
+                commit('set_grocery', response)
             });
         },
 
@@ -53,6 +69,6 @@ export default new Vuex.Store({
             axios.post('api/grocery', payload).then(response => {
                 commit('set_groceries', response)
             });
-        }
+        },
     }
 });
