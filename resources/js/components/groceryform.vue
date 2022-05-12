@@ -1,32 +1,37 @@
 <template>
     <div>
-		<input v-model="itemName">
-		<input v-model="itemValue" type="number" value="0.01" min="0.01" step="0.01"/>
-		<input v-model="itemMax" type="number" value="1" min="1" step="1" oninput="this.value = 
+		<input v-model="grocery.name">
+		<input v-model="grocery.value" type="number" value="0.01" min="0.01" step="0.01"/>
+		<input v-model="grocery.max" type="number" value="1" min="1" step="1" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
-		<button @click="createProduct()">Add</button>	
+ 		<button @click="createProduct()">Add</button>
 	</div>
 </template>
 
 <script>
 export default {
 	name: "GroceryForm",
-	data() {
-		return {
-			itemName: null,
-			itemValue: null,
-			itemMax: null,
+	props: {
+		grocery: {
+			type: Object,
+			required: true,
+			default: {
+				name: "Test",
+				value: 0.01,
+				max: 1
+			}
 		}
 	},
 	methods: {
 		//Adds a new product to the list
 		createProduct() {
 			this.$store.dispatch('createProduct', {
-				name: this.itemName, 
-				value: this.itemValue,
+				name: this.grocery.name, 
+				value: this.grocery.value,
 				amount: 0,
-				max_amount: this.itemMax
+				max_amount: this.grocery.max
 			});
+			this.$router.push('/');
 		},
 
 		//Sends the edit to store/index.js

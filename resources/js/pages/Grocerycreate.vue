@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <router-view />
-        <GroceryForm :data="data" />
+        <GroceryForm />
     </div>
 </template>
 
@@ -9,16 +9,20 @@
 import GroceryForm from "./components/groceryform.vue";
 export default {
   name: "GroceryCreate",
-  props: {
-    data: {
-       required: true,
-       formtype: 0,
-       type: integer
-    }
-  },
   components: {
     GroceryForm
   },
+  methods: {
+		//Adds a new product to the list
+		createProduct() {
+			this.$store.dispatch('createProduct', {
+				name: this.grocery.name, 
+				value: this.grocery.value,
+				amount: 0,
+				max_amount: this.grocery.max
+			});
+		},
+  }
 };
 </script>
 
