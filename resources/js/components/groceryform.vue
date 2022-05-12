@@ -25,7 +25,7 @@ export default {
 			type: Object,
 			required: true,
 			default: {
-				name: "Test",
+				name: "GroceryName",
 				value: 0.01,
 				max: 1
 			}

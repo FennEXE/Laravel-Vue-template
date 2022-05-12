@@ -37,13 +37,6 @@ export default new Vuex.Store({
             });
         },
 
-        getGrocery(payload) {
-            console.log(payload);
-            axios.get('api/grocery/' + payload).then(response => {
-                console.log(response);
-            });
-        },
-
         changeAmount({ commit }, payload) {
             let newPayload = payload.i
             newPayload.amount = payload.newAmount
@@ -59,7 +52,6 @@ export default new Vuex.Store({
         },
 
         deleteProduct({ commit }, payload) {
-            console.log('test')
             axios.delete('api/grocery/' + payload.id).then(response => {
                 console.log(response.data);
                 commit('set_groceries', response)
