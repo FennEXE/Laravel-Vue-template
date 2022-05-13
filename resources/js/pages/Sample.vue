@@ -1,24 +1,19 @@
 <template>
-    <div id="app">
-        <router-view />
-        <basicinput :data="data" />
-    </div>
+	<div id="app">
+		<router-view />
+		<basicinput :data="data" />
+	</div>
 </template>
 
 <script>
 import basicinput from "../components/basic-input.vue";
 export default {
-  name: "Sample",
-  components: {
-    basicinput
-  },
-  data() {
-      test = {
-          name: "A",
-          value: 1,
-          max: 5
-      }
-  }
+	name: "Sample",
+	components: {
+	basicinput
+	},
+	data() {
+	}
 }
 </script>
 

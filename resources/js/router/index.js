@@ -28,8 +28,8 @@ export default new VueRouter({
             component: GroceryEdit,
         },
         {
-            name: "Sample",
-            path: "/Sample",
+            name: "sample",
+            path: "/sample",
             component: Sample,
         }
     ]

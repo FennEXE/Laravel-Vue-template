@@ -10,7 +10,17 @@
 <script>
 export default {
     name: "Sample",
-    prop: ['test'],
+    props: {
+		test: {
+			type: Object,
+			required: true,
+			default: {
+				gname: "GroceryName",
+				gvalue: 0.01,
+				gmax: 1
+			}
+		}
+	},
     data () {
         return {
         content: this.value
