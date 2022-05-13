@@ -1,10 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import GroceryList from "../pages/Grocerylist.vue";
-
 import Sample from "../pages/Sample.vue";
-import GroceryForm from "../components/groceryform.vue";
+
+import GroceryList from "../pages/Grocerylist.vue";
+import GroceryCreate from "../pages/Grocerycreate.vue";
+import GroceryEdit from "../pages/Groceryedit.vue";
 
 Vue.use(VueRouter);
 
@@ -19,12 +20,12 @@ export default new VueRouter({
         {
             name: "create",
             path: "/create",
-            component: GroceryForm
+            component: GroceryCreate
         },
         {
             name: "edit",
             path: "/edit/:id",
-            component: GroceryForm,
+            component: GroceryEdit,
         },
         {
             name: "Sample",

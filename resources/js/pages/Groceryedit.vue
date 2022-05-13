@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GroceryForm from "./components/groceryform.vue";
+import GroceryForm from "../components/groceryform.vue";
 export default {
   name: "GroceryEdit",
   components: {
