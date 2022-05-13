@@ -64,7 +64,6 @@ export default {
 	computed: {
 		grocery() {
 			const getById = this.groceryId;
-			console.log(getById)
 			return this.localGrocery = this.$store.getters.getGroceries.find(x => x["id"] == getById)
 		}
 	},
@@ -73,37 +72,6 @@ export default {
         this.$store.dispatch('getAllGroceries');
     },
 }
-
-// 
-
-// 		//Sends the edit to store/index.js
-// 		editDone() {
-// 			this.$store.dispatch('editProduct', {
-// 				nid: this.productEdit,
-// 				id: this.productList[i].id, 
-// 				name: this.itemName, 
-// 				price: this.itemPrice,
-// 				amount: newAmount,
-// 				max_amount: this.itemMax
-// 			});
-// 		},
-
-// 		//Fills up the product list into Data to prevent the state being altered.
-// 		fillProduct(products) {
-// 			this.productList = JSON.parse(JSON.stringify(products));
-// 		}
-// 	},
-// 	computed: {
-// 		//Product getter for store/index.js
-// 		products() {
-// 			const productGetter = [...this.$store.getters.getGroceries]
-// 			this.fillProduct(productGetter);
-// 			return this.productList;
-// 		}
-// 	},
-// 	created() {
-// 		this.$store.dispatch('getAllGroceries');
-// 	}	
 </script>
 
 <style scoped>
