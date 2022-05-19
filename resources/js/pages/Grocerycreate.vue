@@ -1,7 +1,9 @@
 <template>
     <div id="app">
+        <h2>Create a new product</h2>
         <router-view />
-        <GroceryForm :data="create" />
+        <GroceryForm :groceryProp="create" />
+        <button @click="createProduct()">Add</button>
     </div>
 </template>
 
@@ -11,6 +13,27 @@ export default {
   name: "GroceryCreate",
   components: {
     GroceryForm
+  },
+  data() {
+    return {
+      create: {
+        name: "New Grocery",
+        value: 0.01,
+        max: 1
+      },
+    }
+  },
+  methods: {
+		//Adds a new product to the list
+		createProduct() {
+			this.$store.dispatch('createProduct', {
+				name: this.create.name, 
+				value: this.create.value,
+				amount: 0,
+				max_amount: this.create.max
+			});
+			this.$router.push('/');
+		}
   }
 }
 </script>

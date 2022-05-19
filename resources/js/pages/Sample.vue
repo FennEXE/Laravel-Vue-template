@@ -1,7 +1,8 @@
 <template>
 	<div id="app">
+		<h1>Sample.vue</h1>
 		<router-view />
-		<basicinput :data="data" />
+		<basicinput :test="tester" />
 	</div>
 </template>
 
@@ -13,6 +14,13 @@ export default {
 	basicinput
 	},
 	data() {
+		return {
+			tester: {
+			name: "This is a test",
+			value: 1.59,
+			max: 5
+		}
+		}
 	}
 }
 </script>

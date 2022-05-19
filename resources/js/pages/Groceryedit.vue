@@ -1,7 +1,10 @@
 <template>
     <div id="app">
+      <h1>Edit: {{grocery.name}}</h1>
+      <h2>{{edit}}</h2>
         <router-view />
-        <GroceryForm :data="edit" />
+        <GroceryForm :groceryProp="edit" />
+        <button @click="editProduct()">Edit</button>
     </div>
 </template>
 
@@ -11,6 +14,45 @@ export default {
   name: "GroceryEdit",
   components: {
     GroceryForm
+  },
+  data() {
+    return {
+      edit: {
+        name: "Placeholder",
+        value: 0.01,
+        max: 1
+      },
+			groceryId: this.$route.params.id,
+    }
+  },
+  methods: {
+		editProduct() {
+			this.$store.dispatch('editProduct', {
+				nid: this.groceryId,
+				id: this.groceryId, 
+				name: this.edit.name, 
+				price: this.edit.value,
+				amount: 0,
+				max_amount: this.edit.max,
+			});
+      console.log(this.edit.name);
+			this.$router.push('/');
+		},
+    deepCopy(products) {
+			this.edit = JSON.parse(JSON.stringify(products));
+		}
+	},
+  computed: {
+		grocery() {
+			const getById = this.groceryId;
+      const product = this.$store.getters.getGroceries.find(x => x["id"] == getById)
+			this.deepCopy(product);
+      return product;
+		}
+	},
+	created()
+	{
+    this.$store.dispatch('getAllGroceries');
   },
 };
 </script>

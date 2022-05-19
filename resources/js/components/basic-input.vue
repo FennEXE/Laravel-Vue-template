@@ -1,8 +1,9 @@
 <template>
     <div>
-		<input @input="test">
-		<input @input="test" type="number" value="0.01" min="0.01" step="0.01"/>
-		<input @input="test" type="number" value="1" min="1" step="1" oninput="this.value = 
+		<h2>{{test}}</h2>
+        <input @input="content.name" :value="content.name">
+		<input @input="content.value" type="number" :value="content.value" min="0.01" step="0.01"/>
+		<input @input="content.max" type="number" :value="content.max" min="1" step="1" oninput="this.value = 
  !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
 	</div>
 </template>
@@ -15,21 +16,21 @@ export default {
 			type: Object,
 			required: true,
 			default: {
-				gname: "GroceryName",
-				gvalue: 0.01,
-				gmax: 1
+				name: null,
+                value: null,
+                max: null
 			}
 		}
 	},
     data () {
         return {
-        content: this.value
+        content: this.test
         }
     },
     methods: {
-        localGrocery (e) {
-        this.$emit('input', "ping")
-        }
+        // localGrocery (e) {
+        // this.$emit('input', "ping")
+        // }
     }
     }
 </script>
