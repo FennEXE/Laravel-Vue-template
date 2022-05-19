@@ -6,7 +6,6 @@
  !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1"/>
 	</div>
 	<div v-else>
-		<h2>Edit: Form</h2>
 		<input v-model="localGrocery.name">
 		<input v-model="localGrocery.price" type="number" value="0.01" min="0.01" step="0.01"/>
 		<input v-model="localGrocery.max_amount" type="number" value="1" min="1" step="1" oninput="this.value = 

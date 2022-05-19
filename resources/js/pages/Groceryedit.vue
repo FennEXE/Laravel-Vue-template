@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-      <h1>Edit: {{grocery.name}}</h1>
-      <h2>{{edit}}</h2>
+      <h1>Edit: {{edit.name}}</h1>
         <router-view />
         <GroceryForm :groceryProp="edit" />
         <button @click="editProduct()">Edit</button>
@@ -17,10 +16,11 @@ export default {
   },
   data() {
     return {
+      product: null,
       edit: {
         name: "Placeholder",
-        value: 0.01,
-        max: 1
+        price: 0.01,
+        max_amount: 1
       },
 			groceryId: this.$route.params.id,
     }
@@ -31,11 +31,11 @@ export default {
 				nid: this.groceryId,
 				id: this.groceryId, 
 				name: this.edit.name, 
-				price: this.edit.value,
+				price: this.edit.price,
 				amount: 0,
-				max_amount: this.edit.max,
+				max_amount: this.edit.max_amount,
 			});
-      console.log(this.edit.name);
+      console.log(this.edit);
 			this.$router.push('/');
 		},
     deepCopy(products) {
@@ -53,6 +53,7 @@ export default {
 	created()
 	{
     this.$store.dispatch('getAllGroceries');
+    console.log(this.grocery);
   },
 };
 </script>

@@ -74,12 +74,6 @@ export default {
 		//Adds a new product to the list
 		createProduct() {
 			this.$router.push('/create');
-			// this.$store.dispatch('createProduct', {
-			// 	name: this.itemName, 
-			// 	value: this.itemValue,
-			// 	amount: 0,
-			// 	max_amount: this.itemMax
-			// });
 		},
 
 		//Deletes a product from the list
@@ -90,34 +84,6 @@ export default {
 		//opens up the edit menu for a product.
 		editProduct(product) {
 			this.$router.push('edit/' + product);
-			this.productEdit = product
-			this.itemName = this.productList[product].name
-			this.itemPrice = this.productList[product].price
-			this.itemMax = this.productList[product].max_amount
-			this.formVisible = true;
-		},
-
-		//Sends the edit to store/index.js
-		editDone() {
-			let newAmount = 0
-			let i = this.productEdit
-			this.$store.dispatch('editProduct', {
-				nid: this.productEdit,
-				id: this.productList[i].id, 
-				name: this.itemName, 
-				price: this.itemPrice,
-				amount: newAmount,
-				max_amount: this.itemMax
-			});
-			this.$set(this.productList[i], 'amount', this.itemAmount);
-			this.$set(this.productList[i], 'max_amount', this.itemMax);
-			this.$set(this.productList[i], 'name', this.itemName);
-			this.$set(this.productList[i], 'value', Number(this.itemPrice).toFixed(2));
-			this.itemName = '';
-			this.itemPrice = 0.01;
-			this.itemAmount = null;
-			this.itemId = null
-			this.formVisible = false;
 		},
 
 		//Ensures the value is a number.

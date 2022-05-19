@@ -38,7 +38,6 @@ class GroceryController extends Controller
 	{
 		//Axios.put
 		$grocery = Grocery::find($request["id"]);
-		
 		$grocery->update([
 			'name' => $request["name"],
 			'price' => $request["price"],
