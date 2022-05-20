@@ -39,6 +39,7 @@
 	</div>
 </template>
 
+
 <script>
 export default {
 	name: "Groceries",
@@ -113,6 +114,7 @@ export default {
 	}	
 };
 </script>
+
 
 <style scoped>
 th{

@@ -10,7 +10,6 @@ import GroceryEdit from "../pages/Groceryedit.vue";
 Vue.use(VueRouter);
 
 
-
 export default new VueRouter({
     routes: [{
             name: "home",

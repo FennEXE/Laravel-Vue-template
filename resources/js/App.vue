@@ -4,6 +4,7 @@
     </div>
 </template>
 
+
 <script>
 import GroceryList from "./components/groceries.vue";
 import GroceryForm from "./components/groceryform.vue";
@@ -15,6 +16,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 body {

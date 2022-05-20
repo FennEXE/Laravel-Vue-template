@@ -14,11 +14,13 @@ class GroceryController extends Controller
 		return response()->json($grocery);
 	}
 
+
 	public function show(Request $request)
 	{
 		$grocery = Grocery::get($request);
 		return response()->json($grocery);
 	}
+
 
 	public function store(Request $request)
 	{
@@ -34,6 +36,7 @@ class GroceryController extends Controller
 		return response()->json($grocery);
 	}
 
+
 	public function update(Request $request)
 	{
 		//Axios.put
@@ -48,6 +51,7 @@ class GroceryController extends Controller
 		return response()->json($grocery);
 	}
 
+	
 	public function destroy(Grocery $grocery)
 	{
 		//Axios.delete

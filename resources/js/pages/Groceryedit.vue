@@ -7,6 +7,7 @@
     </div>
 </template>
 
+
 <script>
 import GroceryForm from "../components/groceryform.vue";
 export default {
@@ -57,6 +58,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 body {

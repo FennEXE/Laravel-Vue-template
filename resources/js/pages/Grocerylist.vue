@@ -5,6 +5,7 @@
     </div>
 </template>
 
+
 <script>
 import Groceries from '../components/groceries.vue';
 export default {
@@ -14,6 +15,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 body {

@@ -5,12 +5,15 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+
+
 export default new Vuex.Store({
     state: { 
         groceries: [],
         grocery: null,
         formtype: null,
     },
+
 
     mutations: {
         set_groceries: function (state, payload) {
@@ -21,6 +24,7 @@ export default new Vuex.Store({
         },
     },
 
+
     getters: {
         getGroceries(state) {
             return state.groceries
@@ -29,6 +33,7 @@ export default new Vuex.Store({
             return state.grocery
         }
     },
+
 
     actions: {
         getAllGroceries({ commit }) {
