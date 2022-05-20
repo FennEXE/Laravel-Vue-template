@@ -45,6 +45,10 @@ export default new Vuex.Store({
         changeAmount({ commit }, payload) {
             let newPayload = payload.i
             newPayload.amount = payload.newAmount
+            if(newPayload.amount > newPayload.max_amount)
+            {
+                newPayload.amount = newPayload.max_amount;
+            }
             axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
                 commit('set_groceries', response)
             });
