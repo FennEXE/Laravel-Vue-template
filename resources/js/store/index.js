@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 
 export default new Vuex.Store({
-    state: { 
+    state: {
         groceries: [],
         grocery: null,
         formtype: null,
@@ -16,10 +16,10 @@ export default new Vuex.Store({
 
 
     mutations: {
-        set_groceries: function (state, payload) {
+        set_groceries: function(state, payload) {
             state.groceries = payload.data;
         },
-        set_grocery: function (state, payload) {
+        set_grocery: function(state, payload) {
             state.grocery = payload.data
         },
     },
@@ -36,40 +36,34 @@ export default new Vuex.Store({
 
 
     actions: {
-        getAllGroceries({ commit }) {
-            axios.get('api/grocery').then(response => {
-                commit('set_groceries', response)
-            });
+        async getAllGroceries({ commit }) {
+            const { data } = await axios.get('api/grocery');
+            commit('set_groceries', data);
         },
 
-        changeAmount({ commit }, payload) {
+        async changeAmount({ commit }, payload) {
             let newPayload = payload.i
             newPayload.amount = payload.newAmount
-            if(newPayload.amount > newPayload.max_amount)
-            {
+            if (newPayload.amount > newPayload.max_amount) {
                 newPayload.amount = newPayload.max_amount;
             }
-            axios.put('api/grocery/' + newPayload.id, newPayload).then(response => {
-                commit('set_groceries', response)
-            });
+            const { data } = await axios.put('api/grocery/' + newPayload.id, newPayload);
+            commit('set_groceries', data);
         },
 
-        editProduct({ commit }, payload) {
-            axios.put('api/grocery/' + payload.id, payload).then(response => {
-                commit('set_groceries', response)
-            });
+        async editProduct({ commit }, payload) {
+            const { data } = await axios.put('api/grocery/' + payload.id, payload);
+            commit('set_groceries', data);
         },
 
-        deleteProduct({ commit }, payload) {
-            axios.delete('api/grocery/' + payload.id).then(response => {
-                commit('set_groceries', response)
-            });
+        async deleteProduct({ commit }, payload) {
+            const { data } = await axios.delete('api/grocery/' + payload.id);
+            commit('set_groceries', data);
         },
 
-        createProduct({ commit }, payload) {
-            axios.post('api/grocery', payload).then(response => {
-                commit('set_groceries', response)
-            });
+        async createProduct({ commit }, payload) {
+            const { data } = await axios.post('api/grocery', payload);
+            commit('set_groceries', data);
         },
     }
 });
