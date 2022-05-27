@@ -17,20 +17,14 @@ export default new Vuex.Store({
 
     mutations: {
         set_groceries: function(state, payload) {
-            state.groceries = payload.data;
-        },
-        set_grocery: function(state, payload) {
-            state.grocery = payload.data
-        },
+            state.groceries = payload;
+        }
     },
 
 
     getters: {
         getGroceries(state) {
             return state.groceries
-        },
-        getGrocery(state) {
-            return state.grocery
         }
     },
 
