@@ -13,10 +13,14 @@ class CreateBlogpostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogposts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreign('votes')->references('id')->on('votes');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
-            $table->text('text');
+            $table->text('post');
+            $table->foreign('comments')->references('id')->on('comments');
             $table->timestamps();
         });
     }
