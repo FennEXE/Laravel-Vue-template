@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blogposts;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class BlogpostsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class BlogpostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Blogposts  $blogposts
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Blogposts $blogposts)
+    public function show(Categories $categories)
     {
         //
     }
@@ -52,10 +52,10 @@ class BlogpostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Blogposts  $blogposts
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blogposts $blogposts)
+    public function edit(Categories $categories)
     {
         //
     }
@@ -64,10 +64,10 @@ class BlogpostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Blogposts  $blogposts
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blogposts $blogposts)
+    public function update(Request $request, Categories $categories)
     {
         //
     }
@@ -75,10 +75,10 @@ class BlogpostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Blogposts  $blogposts
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blogposts $blogposts)
+    public function destroy(Categories $categories)
     {
         //
     }

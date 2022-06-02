@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\posts;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -41,10 +41,10 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function show(posts $posts)
+    public function show(Posts $posts)
     {
         //
     }
@@ -52,10 +52,10 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function edit(posts $posts)
+    public function edit(Posts $posts)
     {
         //
     }
@@ -64,10 +64,10 @@ class PostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, posts $posts)
+    public function update(Request $request, Posts $posts)
     {
         //
     }
@@ -75,10 +75,10 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(posts $posts)
+    public function destroy(Posts $posts)
     {
         //
     }

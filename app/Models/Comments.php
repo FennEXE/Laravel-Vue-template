@@ -11,11 +11,11 @@ class Comments extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['commenttitle', 'commenttext'];
+    protected $fillable = ['content'];
 
-    public function blogpost()
+    public function post()
     {
-        return $this->belongsTo(Blogpost::class);
+        return $this->belongsTo(Posts::class);
     }
 
     public function user()
