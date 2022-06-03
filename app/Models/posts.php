@@ -18,6 +18,11 @@ class Posts extends Model
 
     public function user()
     {
-        return $this->BelongsTo(User::class);
+        return $this->belongsTo(Users::class);
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Categories::class);
     }
 }
