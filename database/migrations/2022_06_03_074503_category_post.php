@@ -16,10 +16,14 @@ class PostCategory extends Migration
         Schema::create('category_post', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
+        });
+
+        Schema::table('category_post', function($table)
+        {
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
