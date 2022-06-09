@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PostCategory extends Migration
+class CategoryPost extends Migration
 {
     /**
      * Run the migrations.
@@ -16,14 +16,10 @@ class PostCategory extends Migration
         Schema::create('category_post', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('post_id');
-            $table->timestamps();
-        });
-
-        Schema::table('category_post', function($table)
-        {
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');
+            $table->timestamps();
         });
     }
 

@@ -23,7 +23,6 @@ class CreateVotesTable extends Migration
 
         Schema::table('votes', function($table)
         {
-            $table->foreign('post_id')->references('id')->on('posts');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
