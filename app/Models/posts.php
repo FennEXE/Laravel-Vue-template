@@ -18,11 +18,11 @@ class Posts extends Model
 
     public function user()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Users::class); //Bind user to a post.
     }
 
     public function category()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Categories::class); //Bind category to a post.
     }
 }

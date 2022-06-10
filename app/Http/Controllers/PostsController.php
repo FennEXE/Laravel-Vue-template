@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use App\Models\Categories;
-use App\Models\CategoriesPosts;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -46,12 +45,8 @@ class PostsController extends Controller
         //     'content' => $validated['content'],	
 		// ]);
 
-        // $category = CategoriesPosts::create([
-        //     'category_id' => $validated['category'],
-        //     'post_id' => $post['id']
-        // ]);
-
-        Posts::create($validated)->categories()->attach(explode(',', $validated['category_id']));
+        //More efficient maybe?
+        $post = Posts::create($validated)->categories()->attach(explode(',', $validated['category_id']));
 
 		$return = Posts::get($post);
 		return response()->json($return);
@@ -89,7 +84,11 @@ class PostsController extends Controller
      */
     public function update(Request $request, Posts $posts)
     {
-        //
+        //Axios.put
+        $post = Posts::find($reqiest['id']);
+        $post->update([
+            //
+        ]);
     }
 
     /**
@@ -100,6 +99,9 @@ class PostsController extends Controller
      */
     public function destroy(Posts $posts)
     {
-        //
+        //Axios.delete
+		$grocery->delete();
+		$grocery = Grocery::get();
+		return response()->json($grocery);
     }
 }
