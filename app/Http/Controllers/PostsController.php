@@ -27,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        //Not used?
     }
 
     /**
@@ -72,7 +72,7 @@ class PostsController extends Controller
      */
     public function edit(Posts $posts)
     {
-        //
+        //Not used?
     }
 
     /**
@@ -85,9 +85,11 @@ class PostsController extends Controller
     public function update(Request $request, Posts $posts)
     {
         //Axios.put
-        $post = Posts::find($reqiest['id']);
+        $post = Posts::find($request['id']);
+        $validated = $request->validated();
         $post->update([
-            //
+            'title' => $validated['title'],
+            'content' => $validated['content']
         ]);
     }
 

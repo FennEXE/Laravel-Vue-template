@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -14,7 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::get();
+		return response()->json($categories);
     }
 
     /**
@@ -35,7 +36,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = Categories::create($request);
     }
 
     /**
@@ -69,7 +70,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        //Redundant?
     }
 
     /**
@@ -80,6 +81,9 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        //Axios.delete
+		$categories->delete();
+		$categories = Grocery::get();
+		return response()->json($categories);
     }
 }

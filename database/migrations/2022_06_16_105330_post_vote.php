@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CategoryPost extends Migration
+class PostVote extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CategoryPost extends Migration
      */
     public function up()
     {
-        Schema::create('category_post', function (Blueprint $table) {
+        Schema::create('post_vote', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CategoryPost extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_post');
+        //
     }
 }
