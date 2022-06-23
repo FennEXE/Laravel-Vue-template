@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\votes;
+use App\Models\Votes;
 use Illuminate\Http\Request;
 
 class VotesController extends Controller
@@ -14,7 +14,8 @@ class VotesController extends Controller
      */
     public function index()
     {
-        //
+        $votes = Votes::get();
+		return response()->json($posts);
     }
 
     /**
@@ -35,7 +36,12 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validated();
         //
+        $vote = Votes::create($validated)->posts()->attach(explode(',', $validated['category_id']));
+
+        $votes = Votes::get($request['id']);
+        return response()->json($votes);
     }
 
     /**

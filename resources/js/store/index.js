@@ -5,95 +5,111 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+
+
 export default new Vuex.Store({
     state: {
-        groceries: [],
-        blogs: [],
+        posts: [],
+        comments: [],
+        votes: [],
+        categories: [],
     },
+
 
     mutations: {
-        set_groceries(state, payload) {
-            state.groceries = payload.data;
+        set_posts: function(state, payload) {
+            state.posts = payload;
         },
-
-        set_blog(state, payload) {
-            state.blogs = payload.data;
+        set_comments: function(state, payload) {
+            state.posts = payload;
         },
-
-        changeCount(state, payload) {
-            let newPayload = state.groceries[payload.nid];
-            newPayload.amount = payload.amount;
-            axios.put('api/grocery/' + newPayload.id, newPayload)
+        set_votes: function(state, payload) {
+            state.posts = payload;
         },
-
-        sqlEdit(state, payload) {
-            axios.put('api/grocery/' + payload.id, payload).then(response => {
-                let newGroceries = response.data;
-                state.groceries = newGroceries;
-            })
+        set_categories: function(state, payload) {
+            state.posts = payload;
         },
-
-        sqlDestroy(state, payload) {
-            let newPayload = state.groceries[payload];
-            axios.delete('api/grocery/' + newPayload.id).then(response => {
-                let newGroceries = response.data;
-                state.groceries = newGroceries;
-            })
-        },
-
-        sqlCreate(state, payload) {
-            axios.post('api/grocery', payload).then(response => {
-                let newGroceries = response.data;
-                state.groceries = newGroceries;
-            })
-        }
     },
+
 
     getters: {
-        getGroceries(state) {
-            return state.groceries
-        },
-        getBlogs(state) {
-            return state.blogs
-        },
-        getComments(state) {
-            return state.comments
+        get_posts(state) {
+            return state.posts
         }
     },
 
+
     actions: {
-        getAllGroceries({ commit }) {
-            axios.get('api/grocery').then(response => {
-                commit('set_groceries', response)
-            });
-        },
-        changeAmount({ commit }, payload) {
-            commit('changeCount', payload)
+        //postController
+        async getAllPosts({ commit }) {
+            const { data } = await axios.get('api/posts');
+            commit('set_posts', data);
         },
 
-        editProduct({ commit }, payload) {
-            commit('sqlEdit', payload)
+        async getPost({ commit }) {
+            const { data } = await axios.get('api/posts/' + payload.id);
+            commit('set_posts', data);
         },
 
-        deleteProduct({ commit }, payload) {
-            commit('sqlDestroy', payload)
+        async editPost({ commit }, payload) {
+            const { data } = await axios.put('api/posts/' + payload.id, payload);
+            commit('set_posts', data);
         },
 
-        createProduct({ commit }, payload) {
-            commit('sqlCreate', payload)
+        async deletePost({ commit }, payload) {
+            const { data } = await axios.delete('api/posts/' + payload.id);
+            commit('set_posts', data);
         },
 
-        //=====================================================
-
-        getAllBlogs({ commit }) {
-            axios.get('api/blog').then(response => {
-                commit('set_blog', response)
-            });
+        async createPost({ commit }, payload) {
+            const { data } = await axios.post('api/posts', payload);
+            commit('set_posts', data);
         },
-        getComments({commit}, blogId) {
-            axios.get('api/comment').then(response => {
-                commit('set_comment', response)
-            });
-        }
+
+        //CommentsController
+        async getAllComments({ commit }) {
+            const { data } = await axios.get('api/comments');
+            commit('set_comments', data);
+        },
+
+        async getComment({ commit }) {
+            const { data } = await axios.get('api/comments/' + payload.id);
+            commit('set_comments', data);
+        },
+
+        async editComment({ commit }, payload) {
+            const { data } = await axios.put('api/comments/' + payload.id, payload);
+            commit('set_comments', data);
+        },
+
+        async deleteComment({ commit }, payload) {
+            const { data } = await axios.delete('api/comments/' + payload.id);
+            commit('set_comments', data);
+        },
+
+        async createComment({ commit }, payload) {
+            const { data } = await axios.post('api/comments', payload);
+            commit('set_comments', data);
+        },
+
+        //Votes
+        async getVotes({ commit }) {
+            const { data } = await axios.get('api/votes/' + payload.id);
+            commit('set_votes', data);
+        },
+
+        async vote({ commit }) {
+
+        },
+
+        async changevote({ commit }) {
+
+        },
+
+        //Categories
+        async getAllCategories({ commit }) {
+            const { data } = await axios.get('api/categories');
+            commit('set_categories', data);
+        },
     }
 });

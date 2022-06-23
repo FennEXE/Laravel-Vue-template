@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GroceryController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\VotesController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('grocery', [groceryController::class, 'index']);
-// Route::post('grocery', [groceryController::class, 'store']);
-
-Route::resource('grocery', GroceryController::class);
-Route::resource('blogpost', BlogpostController::class);
-Route::resource('comment', CommentsController::class);
+Route::resource('posts', PostsController::class);
+Route::resource('comments', CommentsController::class);
+Route::resource('votes', VotesController::class);
+Route::resource('categories', CategoriesController::class);
