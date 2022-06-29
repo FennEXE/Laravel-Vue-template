@@ -1,36 +1,37 @@
 <template>
-    <div>
-		<table id="groceryTable" v-for="(posts, i) in posts" :key="i">
-			<tr >
-				<td>{{posts[i].title}}</td>
-				<td>{{posts[i].content}}</td>
-			</tr>
-		</table>	
+    <div v-if="formType==='create'">
+		<input v-model="localBlog.title">
+		<input v-model="localBlog.content" type="text"/>
+	</div>
+	<div v-else>
+		<input v-model="localBlog.title">
+		<input v-model="localBlog.content" type="text"/>
 	</div>
 </template>
 
+
 <script>
 export default {
-	name: "Blog",
+	name: "BlogForm",
+	props: {
+		blogProp: {
+			type: Object,
+			required: true,
+			default: {
+				title: null,
+				content: null,
+			}
+		}
+	},
 	data() {
 		return {
-			posts: []
+			formType: this.$route.name,
+			localBlog: this.blogProp,
 		}
-	},
-	methods: {
-		
-	},
-	computed: {
-		posts() {
-			const posts = this.$store.getters.get_Posts;
-			return posts;
-		}
-	},
-	created() {
-		this.$store.dispatch('getAllPosts');
-	}	
-};
+	}
+}
 </script>
+
 
 <style scoped>
 th{
