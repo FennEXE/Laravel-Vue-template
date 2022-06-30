@@ -1,6 +1,7 @@
 <template>
     <div>
-		<table id="groceryTable" v-for="(posts, i) in posts" :key="i">
+		<b>TEST</b>
+		<table id="groceryTable" v-for="(posts, i) in localPosts" :key="i">
 			<tr >
 				<td>{{posts[i].title}}</td>
 				<td>{{posts[i].content}}</td>
@@ -21,9 +22,9 @@ export default {
 		
 	},
 	computed: {
-		posts() {
-			const posts = this.$store.getters.get_Posts;
-			return posts;
+		localPosts() {
+			const localPosts = this.$store.getters.get_posts;
+			return localPosts;
 		}
 	},
 	created() {

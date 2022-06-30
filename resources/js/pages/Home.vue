@@ -1,9 +1,16 @@
 <template>
-    <div>
-        Home Hello World
+    <div id="app">
+        <b>TEST</b>
+        <blog />
     </div>
 </template>
 
 <script>
-export default {}
+import blog from "./components/blog.vue";
+export default {
+  name: "App",
+  components: {
+    blog
+  },
+};
 </script>

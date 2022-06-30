@@ -2,10 +2,10 @@
 import Vue from "vue";
 
 //Alpine
-require('./bootstrap');
-import Alpine from 'alpinejs';
-window.Alpine = Alpine;
-Alpine.start();
+// require('./bootstrap');
+// import Alpine from 'alpinejs';
+// window.Alpine = Alpine;
+// Alpine.start();
 
 //Main pages
 import App from "./App.vue";

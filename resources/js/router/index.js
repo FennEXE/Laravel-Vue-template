@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from '../pages/Home.vue'
+import Blog from '../components/blog.vue'
 
 Vue.use(VueRouter);
 
@@ -9,7 +9,7 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
-            component: Home
+            component: Blog
         }
     ]
 });

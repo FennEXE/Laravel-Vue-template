@@ -21,13 +21,13 @@ export default new Vuex.Store({
             state.posts = payload;
         },
         set_comments: function(state, payload) {
-            state.posts = payload;
+            state.comments = payload;
         },
         set_votes: function(state, payload) {
-            state.posts = payload;
+            state.votes = payload;
         },
         set_categories: function(state, payload) {
-            state.posts = payload;
+            state.categories = payload;
         },
     },
 
