@@ -52,7 +52,9 @@ class VotesController extends Controller
      */
     public function show(votes $votes)
     {
-        //
+        $votes['upvotes'] = Votes::get($votes)->where('count', '=', 1)->count();
+        $votes['downvotes'] = Votes::get($votes)->where('count', '=', 0)->count();
+        return response()->json($votes);
     }
 
     /**
